@@ -251,12 +251,14 @@ func (alexa *Alexa) ProcessRequest(ctx context.Context, requestEnv *RequestEnvel
 
 	switch requestEnv.Request.Type {
 	case launchRequestName:
+		log.Println("entra por launch xxxxx")
 		err := alexa.RequestHandler.OnLaunch(ctx, request, session, context, response)
 		if err != nil {
 			log.Println("Error handling OnLaunch.", err.Error())
 			return nil, err
 		}
 	case intentRequestName:
+		log.Println( "entra por intent xxxxx")
 		err := alexa.RequestHandler.OnIntent(ctx, request, session, context, response)
 		if err != nil {
 			log.Println("Error handling OnIntent.", err.Error())
