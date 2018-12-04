@@ -248,7 +248,7 @@ func (alexa *Alexa) ProcessRequest(ctx context.Context, requestEnv *RequestEnvel
 			return nil, err
 		}
 	}
-
+log.Println("Entra y tiene el tipo: "+requestEnv.Request.Type)
 	switch requestEnv.Request.Type {
 	case launchRequestName:
 		err := alexa.RequestHandler.OnLaunch(ctx, request, session, context, response)
