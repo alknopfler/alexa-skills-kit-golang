@@ -262,7 +262,8 @@ func (alexa *Alexa) ProcessRequest(ctx context.Context, requestEnv *RequestEnvel
 			log.Println("Error handling OnIntent.", err.Error())
 			return nil, err
 		}
-	case sessionEndedRequestName:
+	default:
+		//case sessionEndedRequestName:
 		err := alexa.RequestHandler.OnSessionEnded(ctx, request, session, context, response)
 		if err != nil {
 			log.Println("Error handling OnSessionEnded.", err.Error())
