@@ -254,7 +254,6 @@ func (alexa *Alexa) ProcessRequest(ctx context.Context, requestEnv *RequestEnvel
 		err := alexa.RequestHandler.OnLaunch(ctx, request, session, context, response)
 		if err != nil {
 			log.Println("Error handling OnLaunch.", err.Error())
-			response.ShouldSessionEnd = true
 			return nil, err
 		}
 	case intentRequestName:
@@ -319,6 +318,7 @@ func (r *Response) SetRepromptText(text string) {
 		r.Reprompt = &Reprompt{}
 	}
 	r.Reprompt.OutputSpeech = &OutputSpeech{Type: "PlainText", Text: text}
+	r.ShouldSessionEnd = true
 }
 
 // SetRepromptSSML created a Reprompt if needed and sets the OutputSpeech type to ssml and sets the value specified.
