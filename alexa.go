@@ -264,6 +264,7 @@ func (alexa *Alexa) ProcessRequest(ctx context.Context, requestEnv *RequestEnvel
 		}
 	default:
 		//case sessionEndedRequestName:
+		log.Println("Entra por default xxxxxxxx")
 		err := alexa.RequestHandler.OnSessionEnded(ctx, request, session, context, response)
 		if err != nil {
 			log.Println("Error handling OnSessionEnded.", err.Error())
