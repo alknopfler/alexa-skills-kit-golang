@@ -248,12 +248,13 @@ func (alexa *Alexa) ProcessRequest(ctx context.Context, requestEnv *RequestEnvel
 			return nil, err
 		}
 	}
-log.Println("Entra y tiene el tipo: "+requestEnv.Request.Type)
+	log.Println("Entrar y tipo: "+requestEnv.Request.Type)
 	switch requestEnv.Request.Type {
 	case launchRequestName:
 		err := alexa.RequestHandler.OnLaunch(ctx, request, session, context, response)
 		if err != nil {
 			log.Println("Error handling OnLaunch.", err.Error())
+			response.ShouldSessionEnd = true
 			return nil, err
 		}
 	case intentRequestName:
@@ -266,13 +267,6 @@ log.Println("Entra y tiene el tipo: "+requestEnv.Request.Type)
 		err := alexa.RequestHandler.OnSessionEnded(ctx, request, session, context, response)
 		if err != nil {
 			log.Println("Error handling OnSessionEnded.", err.Error())
-			return nil, err
-		}
-	default:
-		log.Println("Entra por default xxxxxxxx")
-		err := alexa.RequestHandler.OnIntent(ctx, request, session, context, response)
-		if err != nil {
-			log.Println("Error handling OnIntent.", err.Error())
 			return nil, err
 		}
 	}
